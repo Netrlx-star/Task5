@@ -10,16 +10,33 @@ namespace Task5
     {
         static void Main(string[] args)
         {
-            var v1 = Console.ReadLine().Split(' ').Select(double.Parse).ToArray();
-            var v2 = Console.ReadLine().Split(' ').Select(double.Parse).ToArray();
+            int n = int.Parse(Console.ReadLine());
 
-            if (v1.Length > v2.Length)
-                Console.WriteLine("Longest vector: " + string.Join(" ", v1));
-            else if (v2.Length > v1.Length)
-                Console.WriteLine("Longest vector: " + string.Join(" ", v2));
-            else
-                Console.WriteLine("Vectors are of equal length.");
+double minLength = double.MaxValue;
+double[] shortestVector = null;
 
+for (int i = 0; i < n; i++)
+{
+    double[] v = Console.ReadLine()
+        .Split(' ')
+        .Select(double.Parse)
+        .ToArray();
+
+    double length = Math.Sqrt(
+        v[0] * v[0] +
+        v[1] * v[1] +
+        v[2] * v[2]
+    );
+
+    if (length < minLength)
+    {
+        minLength = length;
+        shortestVector = v;
+    }
+}
+
+Console.WriteLine($"Shortest length: {minLength}");
+Console.WriteLine("Vector: " + string.Join(" ", shortestVector));
         }
     }
 }
